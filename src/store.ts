@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 
-
 export interface Student {
   name: string;
   id: string;
@@ -25,7 +24,6 @@ export const useMainStore = defineStore("mainstore", {
      * @param data 
      */
     updateStudent(data: Student) {
-      // this.count = this.count + 1;
       this.students = this.students.map(item => {
         if (item.id === data.id) {
           return {
@@ -46,14 +44,13 @@ export const useMainStore = defineStore("mainstore", {
      * @param id 
      */
     removeStudent(id: String) {
-      this.students = this.students = this.students.filter(student => student.id !== id);
+      this.students = this.students.filter(student => student.id !== id);
     },
     /**
      * 
      * @param student 
      */
     addStudent(student: { name: string, section: string }) {
-      debugger;
       this.students = [
         {
           name: student.name,
