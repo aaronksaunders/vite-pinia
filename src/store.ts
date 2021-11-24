@@ -1,24 +1,67 @@
 import { defineStore } from "pinia";
 
-interface State {
-  count: number;
+
+export interface Student {
+  name: string;
+  id: string;
+  section: string
 }
+interface State {
+  students: Student[] | [];
+  selectedStudent: Student | null;
+}
+
 
 export const useMainStore = defineStore("mainstore", {
   // convert to a function
   state: (): State => ({
-    count: 0,
+    students: [],
+    selectedStudent: null
   }),
 
   actions: {
-    up() {
-      this.count = this.count + 1;
+    /**
+     * 
+     * @param data 
+     */
+    updateStudent(data: Student) {
+      // this.count = this.count + 1;
+      this.students = this.students.map(item => {
+        if (item.id === data.id) {
+          return {
+            ...item,
+            name: data.name,
+            section: data.section
+          };
+        } else {
+          return item;
+        }
+      });
+
+      //after updating remove selected student
+      this.selectedStudent = null;
     },
-    down() {
-      this.count = this.count - 1;
+    /**
+     * 
+     * @param id 
+     */
+    removeStudent(id: String) {
+      this.students = this.students = this.students.filter(student => student.id !== id);
     },
-    changeTo(payload: { value: number }) {
-      this.count = payload.value;
+    /**
+     * 
+     * @param student 
+     */
+    addStudent(student: { name: string, section: string }) {
+      debugger;
+      this.students = [
+        {
+          name: student.name,
+          id: Math.random() * 100 + '',
+          section: student.section
+        },
+        ...this.students
+      ];
     },
   },
 });
