@@ -56,13 +56,13 @@ const clearInput = () => {
         type="text"
         v-model="item.name"
         placeholder="name"
-        class="bg-blue-100 my-1 p-1 mr-2"
+        class="bg-blue-100 my-1 p-1 mr-2 w-60 xs:w-1/2"
       />
       <input
         type="text"
         v-model="item.section"
         placeholder="section"
-        class="bg-blue-100 my-1 p-1"
+        class="bg-blue-100 my-1 p-1  w-60"
       />
       <div class="my-2">
         <button
@@ -86,13 +86,13 @@ const clearInput = () => {
         type="text"
         v-model="item.name"
         placeholder="name"
-        class="bg-blue-100 my-1 p-1 mr-2"
+        class="bg-blue-100 my-1 p-1 mr-2  w-60"
       />
       <input
         type="text"
         v-model="item.section"
         placeholder="section"
-        class="bg-blue-100 my-1 p-1"
+        class="bg-blue-100 my-1 p-1  w-60"
       />
       <div class="my-2">
         <button
