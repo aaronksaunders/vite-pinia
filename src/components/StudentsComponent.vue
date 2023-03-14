@@ -66,14 +66,14 @@ const clearInput = () => {
       />
       <div class="my-2">
         <button
-          class="rounded-md border-blue-600 hover:bg-blue-500 border-solid bg-blue-400 px-2 py-1 w-36 font-medium text-sm mr-2"
+          class="rounded-md  hover:text-white border-blue-600 hover:bg-blue-500 border-solid bg-blue-400 px-2 py-1 w-36 font-medium text-sm mr-2"
           @click="addStudent"
         >
           ADD STUDENT
         </button>
 
         <button
-          class="rounded-md border-blue-600 hover:bg-blue-500 border-solid bg-blue-400 px-2 py-1 w-20 font-medium text-sm"
+          class="rounded-md  hover:text-white border-blue-600 hover:bg-blue-500 border-solid bg-blue-400 px-2 py-1 w-20 font-medium text-sm"
           @click="clearInput"
         >
           CANCEL
@@ -96,13 +96,13 @@ const clearInput = () => {
       />
       <div class="my-2">
         <button
-          class="rounded-md border-blue-600 hover:bg-blue-500 border-solid bg-blue-400 px-2 py-1 w-40 font-medium text-sm mr-3"
+          class="rounded-md  hover:text-white border-blue-600 hover:bg-blue-500 border-solid bg-blue-400 px-2 py-1 w-40 font-medium text-sm mr-3"
           @click="updateStudent()"
         >
           UPDATE STUDENT
         </button>
         <button
-          class="rounded-md border-blue-600 hover:bg-blue-500 border-solid bg-blue-400 px-2 py-1 w-20 font-medium text-sm"
+          class="rounded-md  hover:text-white border-blue-600 hover:bg-blue-500 border-solid bg-blue-400 px-2 py-1 w-20 font-medium text-sm"
           @click="clearInput"
         >
           CANCEL
@@ -126,19 +126,19 @@ const clearInput = () => {
       </div>
       <div class="mt-2 size">
         <button
-          class="rounded-md border-blue-600 hover:bg-blue-500 border-solid bg-blue-400 px-2 py-1 w-20 font-medium mr-3 text-sm"
+          class="rounded-md hover:text-white border-blue-600 hover:bg-blue-500 border-solid bg-blue-400 px-1 py-1 w-20 font-medium mr-3 text-xs"
           @click="setSelectedStudent(item)"
         >
           EDIT
         </button>
         <button
-          class="rounded-md border-blue-600 hover:bg-blue-500 border-solid bg-blue-400 px-2 py-1 w-20 font-medium text-sm"
+          class="rounded-md  hover:text-white border-blue-600 hover:bg-blue-500 border-solid bg-blue-400 px-1 py-1 w-20 font-medium text-xs"
           @click="mainStore.removeStudent(item.id)"
         >
           DELETE
         </button>
       </div>
-      <div class="border-b border-gray-200 pt-3"></div>
+      <div class="border-b border-blue-200 pt-3"></div>
     </li>
   </ul>
 </template>
