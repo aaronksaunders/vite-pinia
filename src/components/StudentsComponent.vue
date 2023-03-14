@@ -5,7 +5,6 @@ import { useMainStore, Student } from "../store";
 // get the store
 const mainStore = useMainStore();
 
-
 // ref for holding form values
 const item = ref({ name: "", section: "" });
 
@@ -40,30 +39,106 @@ const updateStudent = () => {
   mainStore.updateStudent({ ...item.value, id });
   item.value = { name: "", section: "" };
 };
+
+const clearInput = () => {
+  item.value = { name: "", section: "" };
+  mainStore.selectedStudent = null;
+};
 </script>
 
 <template>
-  <div v-if="mainStore.selectedStudent === null">
-    <input type="text" v-model="item.name" placeholder="name" />
-    <input type="text" v-model="item.section" placeholder="section" />
-    <div><button @click="addStudent">ADD STUDENT</button>&nbsp;</div>
-  </div>
-  <div v-else>
-    <input type="text" v-model="item.name" placeholder="name" />
-    <input type="text" v-model="item.section" placeholder="section" />
-    <div>
-      <button @click="updateStudent()">UPDATE STUDENT</button>
-      <button @click="mainStore.selectedStudent = null">CANCEL</button>
+  <div
+    class="border-solid border-blue-200 border-[1px] rounded p-3 m-2 shadow-lg drop-shadow-md"
+  >
+    <div v-if="mainStore.selectedStudent === null">
+      <div class="mb-1 font-medium text-lg">Enter New Student Information</div>
+      <input
+        type="text"
+        v-model="item.name"
+        placeholder="name"
+        class="bg-blue-100 my-1 p-1 mr-2"
+      />
+      <input
+        type="text"
+        v-model="item.section"
+        placeholder="section"
+        class="bg-blue-100 my-1 p-1"
+      />
+      <div class="my-2">
+        <button
+          class="rounded-md border-blue-600 hover:bg-blue-500 border-solid bg-blue-400 px-2 py-1 w-36 font-medium text-sm mr-2"
+          @click="addStudent"
+        >
+          ADD STUDENT
+        </button>
+
+        <button
+          class="rounded-md border-blue-600 hover:bg-blue-500 border-solid bg-blue-400 px-2 py-1 w-20 font-medium text-sm"
+          @click="clearInput"
+        >
+          CANCEL
+        </button>
+      </div>
+    </div>
+    <div v-else>
+      <div class="mb-1 font-medium text-lg">Update Student Information</div>
+      <input
+        type="text"
+        v-model="item.name"
+        placeholder="name"
+        class="bg-blue-100 my-1 p-1 mr-2"
+      />
+      <input
+        type="text"
+        v-model="item.section"
+        placeholder="section"
+        class="bg-blue-100 my-1 p-1"
+      />
+      <div class="my-2">
+        <button
+          class="rounded-md border-blue-600 hover:bg-blue-500 border-solid bg-blue-400 px-2 py-1 w-40 font-medium text-sm mr-3"
+          @click="updateStudent()"
+        >
+          UPDATE STUDENT
+        </button>
+        <button
+          class="rounded-md border-blue-600 hover:bg-blue-500 border-solid bg-blue-400 px-2 py-1 w-20 font-medium text-sm"
+          @click="clearInput"
+        >
+          CANCEL
+        </button>
+      </div>
     </div>
   </div>
-  <div>Count {{ mainStore.students.length }}</div>
-  <ul>
-    <li v-for="(item, index) in mainStore.students" :key="index">
-      <pre>{{ JSON.stringify(item, null, 2) }}</pre>
+  <div class="my-3 ml-2 font-medium text-lg">Number Of Students {{ mainStore.students.length }}</div>
+  <ul class="mx-2 h-80 overflow-auto">
+    <li v-for="(item, index) in mainStore.students" :key="index" class="mb-4">
       <div>
-        <button @click="setSelectedStudent(item)">EDIT</button>&nbsp;
-        <button @click="mainStore.removeStudent(item.id)">DELETE</button>
+        <div>
+          <span class="mr-1 font-semibold">Name:</span><span>{{ item.name }}</span>
+        </div>
+        <div>
+          <span class="mr-1 font-semibold">Section:</span><span>{{ item.section }}</span>
+        </div>
+        <div>
+          <span class="mr-1 font-semibold">ID:</span><span>{{ item.id }}</span>
+        </div>
       </div>
+      <div class="mt-2 size">
+        <button
+          class="rounded-md border-blue-600 hover:bg-blue-500 border-solid bg-blue-400 px-2 py-1 w-20 font-medium mr-3 text-sm"
+          @click="setSelectedStudent(item)"
+        >
+          EDIT
+        </button>
+        <button
+          class="rounded-md border-blue-600 hover:bg-blue-500 border-solid bg-blue-400 px-2 py-1 w-20 font-medium text-sm"
+          @click="mainStore.removeStudent(item.id)"
+        >
+          DELETE
+        </button>
+      </div>
+      <div class="border-b border-gray-200 pt-3"></div>
     </li>
   </ul>
 </template>
