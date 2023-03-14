@@ -1,64 +1,62 @@
 import { defineStore } from "pinia";
+import {ref} from 'vue';
 
 export interface Student {
   name: string;
   id: string;
-  section: string
-}
-interface State {
-  students: Student[] | [];
-  selectedStudent: Student | null;
+  section: string;
 }
 
+export const useMainStore = defineStore("mainstore", () => {
+  const students = ref<Student[] | []>([]);
+  const selectedStudent = ref<Student | null>(null);
 
-export const useMainStore = defineStore("mainstore", {
-  // convert to a function
-  state: (): State => ({
-    students: [],
-    selectedStudent: null
-  }),
+  /**
+   *
+   * @param data
+   */
+  const updateStudent = (data: Student) => {
+    students.value = students?.value?.map((item: Student) => {
+      if (item.id === data.id) {
+        return {
+          ...item,
+          name: data.name,
+          section: data.section,
+        };
+      } else {
+        return item;
+      }
+    });
 
-  actions: {
-    /**
-     * 
-     * @param data 
-     */
-    updateStudent(data: Student) {
-      this.students = this.students.map(item => {
-        if (item.id === data.id) {
-          return {
-            ...item,
-            name: data.name,
-            section: data.section
-          };
-        } else {
-          return item;
-        }
-      });
+    //after updating remove selected student
+    selectedStudent.value = null;
+  };
 
-      //after updating remove selected student
-      this.selectedStudent = null;
-    },
-    /**
-     * 
-     * @param id 
-     */
-    removeStudent(id: String) {
-      this.students = this.students.filter(student => student.id !== id);
-    },
-    /**
-     * 
-     * @param student 
-     */
-    addStudent(student: { name: string, section: string }) {
-      this.students = [
-        {
-          name: student.name,
-          id: Math.random() * 100 + '',
-          section: student.section
-        },
-        ...this.students
-      ];
-    },
-  },
+  /**
+   *
+   * @param id
+   */
+  const removeStudent = (id: String) => {
+    students.value = students.value.filter(
+      (student: Student) => student.id !== id
+    );
+  };
+
+  /**
+   *
+   * @param student
+   */
+  const addStudent = (student: { name: string; section: string }) => {
+    students.value = [
+      {
+        name: student.name,
+        id: Math.random() * 100 + "",
+        section: student.section,
+      },
+      ...students.value,
+    ];
+  };
+
+  // export
+  return { addStudent, removeStudent, updateStudent, students, selectedStudent}
 });
